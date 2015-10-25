@@ -3,134 +3,134 @@ import java.io.InputStreamReader;
 
  
 public class GobangGame {
-	// ¶¨Òå´ïµ½Ó®Ìõ¼şµÄÆå×ÓÊıÄ¿
+	// å®šä¹‰è¾¾åˆ°èµ¢æ¡ä»¶çš„æ£‹å­æ•°ç›®
 	private final int WIN_COUNT = 5;
-	// ¶¨ÒåÓÃ»§ÊäÈëµÄX×ø±ê
+	// å®šä¹‰ç”¨æˆ·è¾“å…¥çš„Xåæ ‡
 	private int posX = 0;
-	// ¶¨ÒåÓÃ»§ÊäÈëµÄX×ø±ê
+	// å®šä¹‰ç”¨æˆ·è¾“å…¥çš„Xåæ ‡
 	private int posY = 0;
-	// ¶¨ÒåÆåÅÌ
+	// å®šä¹‰æ£‹ç›˜
 	private Chessboard chessboard;
 
 	/**
-	 * ¿Õ¹¹ÔìÆ÷
+	 * ç©ºæ„é€ å™¨
 	 */
 	public GobangGame() {
 	}
 
 	/**
-	 * ¹¹ÔìÆ÷£¬³õÊ¼»¯ÆåÅÌºÍÆå×ÓÊôĞÔ
+	 * æ„é€ å™¨ï¼Œåˆå§‹åŒ–æ£‹ç›˜å’Œæ£‹å­å±æ€§
 	 * 
 	 * @param chessboard
-	 *            ÆåÅÌÀà
+	 *            æ£‹ç›˜ç±»
 	 */
 	public GobangGame(Chessboard chessboard) {
 		this.chessboard = chessboard;
 	}
 
 	/**
-	 * ¼ì²éÊäÈëÊÇ·ñºÏ·¨¡£
+	 * æ£€æŸ¥è¾“å…¥æ˜¯å¦åˆæ³•ã€‚
 	 * 
 	 * @param inputStr
-	 *            ÓÉ¿ØÖÆÌ¨ÊäÈëµÄ×Ö·û´®¡£
-	 * @return ×Ö·û´®ºÏ·¨·µ»Øtrue,·´Ôò·µ»Øfalse¡£
+	 *            ç”±æ§åˆ¶å°è¾“å…¥çš„å­—ç¬¦ä¸²ã€‚
+	 * @return å­—ç¬¦ä¸²åˆæ³•è¿”å›true,ååˆ™è¿”å›falseã€‚
 	 */
 	public boolean isValid(String inputStr) {
-		// ½«ÓÃ»§ÊäÈëµÄ×Ö·û´®ÒÔ¶ººÅ(,)×÷Îª·Ö¸ô£¬·Ö¸ô³ÉÁ½¸ö×Ö·û´®
+		// å°†ç”¨æˆ·è¾“å…¥çš„å­—ç¬¦ä¸²ä»¥é€—å·(,)ä½œä¸ºåˆ†éš”ï¼Œåˆ†éš”æˆä¸¤ä¸ªå­—ç¬¦ä¸²
 		String[] posStrArr = inputStr.split(",");
 		try {
 			posX = Integer.parseInt(posStrArr[0]) - 1;
 			posY = Integer.parseInt(posStrArr[1]) - 1;
 		} catch (NumberFormatException e) {
 			chessboard.printBoard();
-			System.out.println("ÇëÒÔ(Êı×Ö,Êı×Ö)µÄ¸ñÊ½ÊäÈë£º");
+			System.out.println("è¯·ä»¥(æ•°å­—,æ•°å­—)çš„æ ¼å¼è¾“å…¥ï¼š");
 			return false;
 		}
-		// ¼ì²éÊäÈëÊıÖµÊÇ·ñÔÚ·¶Î§Ö®ÄÚ
+		// æ£€æŸ¥è¾“å…¥æ•°å€¼æ˜¯å¦åœ¨èŒƒå›´ä¹‹å†…
 		if (posX < 0 || posX >= Chessboard.BOARD_SIZE || posY < 0
 				|| posY >= Chessboard.BOARD_SIZE) {
 			chessboard.printBoard();
-			System.out.println("XÓëY×ø±êÖ»ÄÜ´óÓÚµÈÓÚ1,ÓëĞ¡ÓÚµÈÓÚ" + Chessboard.BOARD_SIZE
-					+ ",ÇëÖØĞÂÊäÈë£º");
+			System.out.println("Xä¸Yåæ ‡åªèƒ½å¤§äºç­‰äº1,ä¸å°äºç­‰äº" + Chessboard.BOARD_SIZE
+					+ ",è¯·é‡æ–°è¾“å…¥ï¼š");
 			return false;
 		}
-		// ¼ì²éÊäÈëµÄÎ»ÖÃÊÇ·ñÒÑ¾­ÓĞÆå×Ó
+		// æ£€æŸ¥è¾“å…¥çš„ä½ç½®æ˜¯å¦å·²ç»æœ‰æ£‹å­
 		String[][] board = chessboard.getBoard();
-		if (board[posX][posY] != "Ê®") {
+		if (board[posX][posY] != "å") {
 			chessboard.printBoard();
-			System.out.println("´ËÎ»ÖÃÒÑ¾­ÓĞÆå×Ó£¬ÇëÖØĞÂÊäÈë£º");
+			System.out.println("æ­¤ä½ç½®å·²ç»æœ‰æ£‹å­ï¼Œè¯·é‡æ–°è¾“å…¥ï¼š");
 			return false;
 		}
 		return true;
 	}
 
 	/**
-	 * ¿ªÊ¼ÏÂÆå
+	 * å¼€å§‹ä¸‹æ£‹
 	 */
 	public void start() throws Exception {
-		// trueÎªÓÎÏ·½áÊø
+		// trueä¸ºæ¸¸æˆç»“æŸ
 		boolean isOver = false;
 		chessboard.initBoard();
 		chessboard.printBoard();
-		// »ñÈ¡¼üÅÌµÄÊäÈë
+		// è·å–é”®ç›˜çš„è¾“å…¥
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		String inputStr = null;
-		// br.readLine:Ã¿µ±¼üÅÌÊäÈëÒ»ĞĞÄÚÈİ°´»Ø³µ¼ü£¬ÔòÊäÈëµÄÄÚÈİ±»br¶ÁÈ¡µ½
+		// br.readLine:æ¯å½“é”®ç›˜è¾“å…¥ä¸€è¡Œå†…å®¹æŒ‰å›è½¦é”®ï¼Œåˆ™è¾“å…¥çš„å†…å®¹è¢«brè¯»å–åˆ°
 		while ((inputStr = br.readLine()) != null) {
 			isOver = false;
 			if (!isValid(inputStr)) {
-				// Èç¹û²»ºÏ·¨£¬ÒªÇóÖØĞÂÊäÈë£¬ÔÙ¼ÌĞø
+				// å¦‚æœä¸åˆæ³•ï¼Œè¦æ±‚é‡æ–°è¾“å…¥ï¼Œå†ç»§ç»­
 				continue;
 			}
-			// °Ñ¶ÔÓ¦µÄÊı×éÔªËØ¸³Îª"¡ñ"
+			// æŠŠå¯¹åº”çš„æ•°ç»„å…ƒç´ èµ‹ä¸º"â—"
 			String chessman = Chessman.BLACK.getChessman();
 			chessboard.setBoard(posX, posY, chessman);
-			// ÅĞ¶ÏÓÃ»§ÊÇ·ñÓ®ÁË
+			// åˆ¤æ–­ç”¨æˆ·æ˜¯å¦èµ¢äº†
 			if (isWon(posX, posY, chessman)) {
 				isOver = true;
 
 			} else {
-				// ¼ÆËã»úËæ»úÑ¡ÔñÎ»ÖÃ×ø±ê
+				// è®¡ç®—æœºéšæœºé€‰æ‹©ä½ç½®åæ ‡
 				int[] computerPosArr = computerDo();
 				chessman = Chessman.WHITE.getChessman();
 				chessboard.setBoard(computerPosArr[0], computerPosArr[1],
 						chessman);
-				// ÅĞ¶Ï¼ÆËã»úÊÇ·ñÓ®ÁË
+				// åˆ¤æ–­è®¡ç®—æœºæ˜¯å¦èµ¢äº†
 				if (isWon(computerPosArr[0], computerPosArr[1], chessman)) {
 					isOver = true;
 				}
 			}
-			// Èç¹û²úÉúÊ¤Õß£¬Ñ¯ÎÊÓÃ»§ÊÇ·ñ¼ÌĞøÓÎÏ·
+			// å¦‚æœäº§ç”Ÿèƒœè€…ï¼Œè¯¢é—®ç”¨æˆ·æ˜¯å¦ç»§ç»­æ¸¸æˆ
 			if (isOver) {
-				// Èç¹û¼ÌĞø£¬ÖØĞÂ³õÊ¼»¯ÆåÅÌ£¬¼ÌĞøÓÎÏ·
+				// å¦‚æœç»§ç»­ï¼Œé‡æ–°åˆå§‹åŒ–æ£‹ç›˜ï¼Œç»§ç»­æ¸¸æˆ
 				if (isReplay(chessman)) {
 					chessboard.initBoard();
 					chessboard.printBoard();
 					continue;
 				}
-				// Èç¹û²»¼ÌĞø£¬ÍË³ö³ÌĞò
+				// å¦‚æœä¸ç»§ç»­ï¼Œé€€å‡ºç¨‹åº
 				break;
 			}
 			chessboard.printBoard();
-			System.out.println("ÇëÊäÈëÄúÏÂÆåµÄ×ø±ê£¬Ó¦ÒÔx,yµÄ¸ñÊ½ÊäÈë£º");
+			System.out.println("è¯·è¾“å…¥æ‚¨ä¸‹æ£‹çš„åæ ‡ï¼Œåº”ä»¥x,yçš„æ ¼å¼è¾“å…¥ï¼š");
 		}
 	}
 
 	/**
-	 * ÊÇ·ñÖØĞÂ¿ªÊ¼ÏÂÆå¡£
+	 * æ˜¯å¦é‡æ–°å¼€å§‹ä¸‹æ£‹ã€‚
 	 * 
 	 * @param chessman
-	 *            "¡ñ"ÎªÓÃ»§£¬"¡ğ"Îª¼ÆËã»ú¡£
-	 * @return ¿ªÊ¼·µ»Øtrue£¬·´Ôò·µ»Øfalse¡£
+	 *            "â—"ä¸ºç”¨æˆ·ï¼Œ"â—‹"ä¸ºè®¡ç®—æœºã€‚
+	 * @return å¼€å§‹è¿”å›trueï¼Œååˆ™è¿”å›falseã€‚
 	 */
 	public boolean isReplay(String chessman) throws Exception {
 		chessboard.printBoard();
-		String message = chessman.equals(Chessman.BLACK.getChessman()) ? "¹§Ï²Äú£¬ÄúÓ®ÁË£¬"
-				: "ºÜÒÅº¶£¬ÄúÊäÁË£¬";
-		System.out.println(message + "ÔÙÏÂÒ»¾Ö£¿(y/n)");
+		String message = chessman.equals(Chessman.BLACK.getChessman()) ? "æ­å–œæ‚¨ï¼Œæ‚¨èµ¢äº†ï¼Œ"
+				: "å¾ˆé—æ†¾ï¼Œæ‚¨è¾“äº†ï¼Œ";
+		System.out.println(message + "å†ä¸‹ä¸€å±€ï¼Ÿ(y/n)");
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		if (br.readLine().equals("y")) {
-			// ¿ªÊ¼ĞÂÒ»¾Ö
+			// å¼€å§‹æ–°ä¸€å±€
 			return true;
 		}
 		return false;
@@ -138,14 +138,14 @@ public class GobangGame {
 	}
 
 	/**
-	 * ¼ÆËã»úËæ»úÏÂÆå
+	 * è®¡ç®—æœºéšæœºä¸‹æ£‹
 	 */
 	public int[] computerDo_old() {
 		
 		int posX = (int) (Math.random() * (Chessboard.BOARD_SIZE - 1));
 		int posY = (int) (Math.random() * (Chessboard.BOARD_SIZE - 1));
 		String[][] board = chessboard.getBoard();
-		while (board[posX][posY] != "Ê®") {
+		while (board[posX][posY] != "å") {
 			posX = (int) (Math.random() * (Chessboard.BOARD_SIZE - 1));
 			posY = (int) (Math.random() * (Chessboard.BOARD_SIZE - 1));
 		}
@@ -154,40 +154,90 @@ public class GobangGame {
 	}
 
 	/**
-	 * ¼ÆËã»úËæ»úÏÂÆå_ÖÇÄÜ°æ
-	 * ¸Ä½øË¼Â·£ºÔÚÈËÏÂÍêÒ»²½Æåºó£¬ÕÒ´æÔÚ¸úÈËµÄÆå×ÓÓĞÏàÍ¬ÑÕÉ«µÄÆå×ÓµÄ·½Ïò£¬¹²8¸ö·½Ïò£¬
- * 				È»ºóÔÚÕâ¸ö·½ÏòÓÃµçÄÔµÄÆå×Ó½øĞĞ¶Â½Ø£¬·ÀÖ¹ĞÎ³É5Á¬×Ó¡£
+	 * è®¡ç®—æœºéšæœºä¸‹æ£‹_æ™ºèƒ½ç‰ˆ
+	 * æ”¹è¿›æ€è·¯ï¼šåœ¨äººä¸‹å®Œä¸€æ­¥æ£‹åï¼Œæ‰¾å­˜åœ¨è·Ÿäººçš„æ£‹å­æœ‰ç›¸åŒé¢œè‰²çš„æ£‹å­çš„æ–¹å‘ï¼Œå…±8ä¸ªæ–¹å‘ï¼Œ
+ * 				ç„¶ååœ¨è¿™ä¸ªæ–¹å‘ç”¨ç”µè„‘çš„æ£‹å­è¿›è¡Œå µæˆªï¼Œé˜²æ­¢å½¢æˆ5è¿å­ã€‚
 	 */
 	public int[] computerDo() {
 		int[] lastXY=chessboard.getLastXY();
 		int lastX = lastXY[0];
 		int lastY = lastXY[1];
-		int direction=1; //8¸ö·½Ïò¿ÉÄÜÓĞ¶Ô·½ÏàÍ¬ÑÕÉ«µÄÆå×Ó£¬È·¶¨ÊÇÄÄ¸ö·½Ïò
+		int direction=1; //8ä¸ªæ–¹å‘å¯èƒ½æœ‰å¯¹æ–¹ç›¸åŒé¢œè‰²çš„æ£‹å­ï¼Œç¡®å®šæ˜¯å“ªä¸ªæ–¹å‘
+		int tmpWeight=0;
+		int[] weight={0,0,0,0,0,0,0,0};	//8ä¸ªæ–¹å‘çš„æƒé‡ï¼Œè¿™ä¸ªæ–¹å‘æ£‹å­è¶Šå¤šæƒé‡è¶Šå¤§
 		int posX,posY;
 		
 		String[][] board = chessboard.getBoard();
 		if((lastX+1)<Chessboard.BOARD_SIZE && board[lastX+1][lastY]==Chessman.BLACK.getChessman()){
 			direction=1;
+			tmpWeight=1;
+			for(int i=lastX+1;(i<Chessboard.BOARD_SIZE)&& board[i][lastY]==Chessman.BLACK.getChessman();i++){
+				tmpWeight++;
+			}
+			weight[direction-1]=tmpWeight;
 		}else if((lastX+1)<Chessboard.BOARD_SIZE &&(lastY-1)>=0 && board[lastX+1][lastY-1]==Chessman.BLACK.getChessman()){
 			direction=2;
+			tmpWeight=1;
+			for(int i=lastX+1,j=lastY-1;(i<Chessboard.BOARD_SIZE)&&(j>=0)&&board[i][j]==Chessman.BLACK.getChessman();i++,j--){
+				tmpWeight++;
+			}
+			weight[direction-1]=tmpWeight;
 		}else if((lastY-1)>=0 && board[lastX][lastY-1]==Chessman.BLACK.getChessman()){
 			direction=3;
+			tmpWeight=1;
+			for(int j=lastY-1;(j>=0)&& board[lastX][j]==Chessman.BLACK.getChessman();j--){
+				tmpWeight++;
+			}
+			weight[direction-1]=tmpWeight;
 		}else if((lastX-1)>=0 && (lastY-1)>=0 && board[lastX-1][lastY-1]==Chessman.BLACK.getChessman()){
 			direction=4;
+			tmpWeight=1;
+			for(int i=lastX-1,j=lastY-1;(i>=0)&&(j>=0)&&board[i][j]==Chessman.BLACK.getChessman();i--,j--){
+				tmpWeight++;
+			}
+			weight[direction-1]=tmpWeight;
 		}else if((lastX-1)>=0 && board[lastX-1][lastY]==Chessman.BLACK.getChessman()){
 			direction=5;
+			tmpWeight=1;
+			for(int i=lastX-1;(i>=0)&&board[i][lastY]==Chessman.BLACK.getChessman();i--){
+				tmpWeight++;
+			}
+			weight[direction-1]=tmpWeight;
 		}else if((lastX-1)>=0 && (lastY+1)<Chessboard.BOARD_SIZE && board[lastX-1][lastY+1]==Chessman.BLACK.getChessman()){
 			direction=6;
+			tmpWeight=1;
+			for(int i=lastX-1,j=lastY+1;(i>=0)&&(j<Chessboard.BOARD_SIZE)&&board[i][j]==Chessman.BLACK.getChessman();i--,j++){
+				tmpWeight++;
+			}
+			weight[direction-1]=tmpWeight;
 		}else if((lastY+1)<Chessboard.BOARD_SIZE && board[lastX][lastY+1]==Chessman.BLACK.getChessman()){
 			direction=7;
+			tmpWeight=1;
+			for(int j=lastY+1;(j<Chessboard.BOARD_SIZE)&&board[lastX][j]==Chessman.BLACK.getChessman();j++){
+				tmpWeight++;
+			}
+			weight[direction-1]=tmpWeight;
 		}else if((lastX+1)<Chessboard.BOARD_SIZE && (lastY+1)<Chessboard.BOARD_SIZE && board[lastX+1][lastY+1]==Chessman.BLACK.getChessman()){
 			direction=8;
+			tmpWeight=1;
+			for(int i=lastX+1,j=lastY+1;(i<Chessboard.BOARD_SIZE)&&(j<Chessboard.BOARD_SIZE)&&board[i][j]==Chessman.BLACK.getChessman();i++,j++){
+				tmpWeight++;
+			}
+			weight[direction-1]=tmpWeight;
 		}
 		
+		//é€‰æ‹©æƒé‡æœ€å¤§çš„æ–¹å‘è¿›è¡Œå µæˆª
+		int maxWeight=0;
+		for(int k=0;k<weight.length;k++){
+			if(weight[k]>maxWeight){
+				maxWeight=weight[k];
+				direction=k+1;
+			}
+		}
 		
 		if(direction==1){
 			for(int i=2;lastX+i<Chessboard.BOARD_SIZE;i++){
-				if(board[lastX+i][lastY]=="Ê®"){
+				if(board[lastX+i][lastY]=="å"){
 					posX = lastX+i;
 					posY = lastY;
 					int[] result = { posX, posY };
@@ -195,7 +245,7 @@ public class GobangGame {
 				}
 			}
 			for(int i=1;lastX-i>=0;i++){
-				if(board[lastX-i][lastY]=="Ê®"){
+				if(board[lastX-i][lastY]=="å"){
 					posX = lastX-i;
 					posY = lastY;
 					int[] result = { posX, posY };
@@ -204,7 +254,7 @@ public class GobangGame {
 			}
 		}else if(direction==5){
 			for(int i=2;lastX-i>=0;i++){
-				if(board[lastX-i][lastY]=="Ê®"){
+				if(board[lastX-i][lastY]=="å"){
 					posX = lastX-i;
 					posY = lastY;
 					int[] result = { posX, posY };
@@ -212,7 +262,7 @@ public class GobangGame {
 				}
 			}
 			for(int i=1;(lastX+i)<Chessboard.BOARD_SIZE;i++){
-				if(board[lastX+i][lastY]=="Ê®"){
+				if(board[lastX+i][lastY]=="å"){
 					posX = lastX+i;
 					posY = lastY;
 					int[] result = { posX, posY };
@@ -221,7 +271,7 @@ public class GobangGame {
 			}
 		}else if(direction==2){
 			for(int i=2;(lastX+i)<Chessboard.BOARD_SIZE && (lastY-i)>=0;i++){
-				if(board[lastX+i][lastY-i]=="Ê®"){
+				if(board[lastX+i][lastY-i]=="å"){
 					posX = lastX+i;
 					posY = lastY-i;
 					int[] result = { posX, posY };
@@ -229,7 +279,7 @@ public class GobangGame {
 				}
 			}
 			for(int i=1;(lastX-i)>=0&&(lastY+i)<Chessboard.BOARD_SIZE;i++){
-				if(board[lastX-i][lastY+i]=="Ê®"){
+				if(board[lastX-i][lastY+i]=="å"){
 					posX = lastX-i;
 					posY = lastY+i;
 					int[] result = { posX, posY };
@@ -238,7 +288,7 @@ public class GobangGame {
 			}
 		}else if(direction==6){
 			for(int i=2;(lastX-i)>=0 && (lastY+i)<Chessboard.BOARD_SIZE;i++){
-				if(board[lastX-i][lastY+i]=="Ê®"){
+				if(board[lastX-i][lastY+i]=="å"){
 					posX = lastX-i;
 					posY = lastY+i;
 					int[] result = { posX, posY };
@@ -246,7 +296,7 @@ public class GobangGame {
 				}
 			}
 			for(int i=1;(lastX+i)<Chessboard.BOARD_SIZE&&(lastY-i)>=0;i++){
-				if(board[lastX+i][lastY-i]=="Ê®"){
+				if(board[lastX+i][lastY-i]=="å"){
 					posX = lastX+i;
 					posY = lastY-i;
 					int[] result = { posX, posY };
@@ -255,7 +305,7 @@ public class GobangGame {
 			}
 		}else if(direction==3){
 			for(int i=2;lastY-i>=0;i++){
-				if(board[lastX][lastY-i]=="Ê®"){
+				if(board[lastX][lastY-i]=="å"){
 					posX = lastX;
 					posY = lastY-i;
 					int[] result = { posX, posY };
@@ -263,7 +313,7 @@ public class GobangGame {
 				}
 			}
 			for(int i=1;(lastY+i)<Chessboard.BOARD_SIZE;i++){
-				if(board[lastX][lastY+i]=="Ê®"){
+				if(board[lastX][lastY+i]=="å"){
 					posX = lastX;
 					posY = lastY+i;
 					int[] result = { posX, posY };
@@ -272,7 +322,7 @@ public class GobangGame {
 			}
 		}else if(direction==7){
 			for(int i=2;(lastY+i)<Chessboard.BOARD_SIZE;i++){
-				if(board[lastX][lastY+i]=="Ê®"){
+				if(board[lastX][lastY+i]=="å"){
 					posX = lastX;
 					posY = lastY+i;
 					int[] result = { posX, posY };
@@ -280,7 +330,7 @@ public class GobangGame {
 				}
 			}
 			for(int i=1;(lastY-i)>=0;i++){
-				if(board[lastX][lastY-i]=="Ê®"){
+				if(board[lastX][lastY-i]=="å"){
 					posX = lastX;
 					posY = lastY-i;
 					int[] result = { posX, posY };
@@ -289,7 +339,7 @@ public class GobangGame {
 			}
 		}else if(direction==4){
 			for(int i=2;(lastX-i)>=0 && (lastY-i)>=0;i++){
-				if(board[lastX-i][lastY-i]=="Ê®"){
+				if(board[lastX-i][lastY-i]=="å"){
 					posX = lastX-i;
 					posY = lastY-i;
 					int[] result = { posX, posY };
@@ -297,7 +347,7 @@ public class GobangGame {
 				}
 			}
 			for(int i=1;(lastX+i)<Chessboard.BOARD_SIZE&&(lastY+i)<Chessboard.BOARD_SIZE;i++){
-				if(board[lastX+i][lastY+i]=="Ê®"){
+				if(board[lastX+i][lastY+i]=="å"){
 					posX = lastX+i;
 					posY = lastY+i;
 					int[] result = { posX, posY };
@@ -306,7 +356,7 @@ public class GobangGame {
 			}
 		}else if(direction==8){
 			for(int i=2;(lastX+i)<Chessboard.BOARD_SIZE&&(lastY+i)<Chessboard.BOARD_SIZE;i++){
-				if(board[lastX+i][lastY+i]=="Ê®"){
+				if(board[lastX+i][lastY+i]=="å"){
 					posX = lastX+i;
 					posY = lastY+i;
 					int[] result = { posX, posY };
@@ -314,7 +364,7 @@ public class GobangGame {
 				}
 			}
 			for(int i=1;(lastX-i)>=0&&(lastY-i)>=0;i++){
-				if(board[lastX-i][lastY-i]=="Ê®"){
+				if(board[lastX-i][lastY-i]=="å"){
 					posX = lastX-i;
 					posY = lastY-i;
 					int[] result = { posX, posY };
@@ -323,10 +373,10 @@ public class GobangGame {
 			}
 		}
 		
-		//Èç¹û»¹Ã»×ßÆå£¬Ëæ»úÏÂÒ»¸öÆå×Ó
+		//å¦‚æœè¿˜æ²¡èµ°æ£‹ï¼Œéšæœºä¸‹ä¸€ä¸ªæ£‹å­
 		posX = (int) (Math.random() * (Chessboard.BOARD_SIZE - 1));
 		posY = (int) (Math.random() * (Chessboard.BOARD_SIZE - 1));
-		while (board[posX][posY] != "Ê®") {
+		while (board[posX][posY] != "å") {
 			posX = (int) (Math.random() * (Chessboard.BOARD_SIZE - 1));
 			posY = (int) (Math.random() * (Chessboard.BOARD_SIZE - 1));
 		}
@@ -335,21 +385,21 @@ public class GobangGame {
 	}
 	
 	/**
-	 * ÅĞ¶ÏÊäÓ®
+	 * åˆ¤æ–­è¾“èµ¢
 	 * 
 	 * @param posX
-	 *            Æå×ÓµÄX×ø±ê¡£
+	 *            æ£‹å­çš„Xåæ ‡ã€‚
 	 * @param posY
-	 *            Æå×ÓµÄY×ø±ê
+	 *            æ£‹å­çš„Yåæ ‡
 	 * @param ico
-	 *            Æå×ÓÀàĞÍ
-	 * @return Èç¹ûÓĞÎå¿ÅÏàÁÚÆå×ÓÁ¬³ÉÒ»ÌõÖ±½Ó£¬·µ»ØÕæ£¬·ñÔòÏà·´¡£
+	 *            æ£‹å­ç±»å‹
+	 * @return å¦‚æœæœ‰äº”é¢—ç›¸é‚»æ£‹å­è¿æˆä¸€æ¡ç›´æ¥ï¼Œè¿”å›çœŸï¼Œå¦åˆ™ç›¸åã€‚
 	 */
 	public boolean isWon(int posX, int posY, String ico) {
 		int count,i,j;
 		String[][] board = chessboard.getBoard();
 		
-		//ºáÏò
+		//æ¨ªå‘
 		count=1;
 		for(i=posX-1,j=posY;i>=0;i--){
 			if(board[i][j] == ico){
@@ -368,7 +418,7 @@ public class GobangGame {
 			}
 		}
 		
-		//ÊúÏò
+		//ç«–å‘
 		count=1;
 		for(i=posX,j=posY-1;j>=0;j--){
 			if(board[i][j] == ico){
@@ -387,7 +437,7 @@ public class GobangGame {
 			}
 		}
 		
-		//Ğ±Ïò "\"
+		//æ–œå‘ "\"
 		count=1;
 		for(i=posX-1,j=posY-1;i>=0&&j>=0;i--,j--){
 			if(board[i][j] == ico){
@@ -406,7 +456,7 @@ public class GobangGame {
 			}
 		}
 		
-		//Ğ±Ïò "/"
+		//æ–œå‘ "/"
 		count=1;
 		for(i=posX+1,j=posY-1;i<Chessboard.BOARD_SIZE&&j>=0;i++,j--){
 			if(board[i][j] == ico){
