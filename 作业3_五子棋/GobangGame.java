@@ -46,6 +46,7 @@ public class GobangGame {
 			System.out.println("请以(数字,数字)的格式输入：");
 			return false;
 		}
+		
 		// 检查输入数值是否在范围之内
 		if (posX < 0 || posX >= Chessboard.BOARD_SIZE || posY < 0
 				|| posY >= Chessboard.BOARD_SIZE) {
