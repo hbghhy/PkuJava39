@@ -179,7 +179,7 @@ public class GobangGame {
 		for(i=0;i<chessboard.BOARD_SIZE;i++)
 			for(j=0;j<chessboard.BOARD_SIZE;j++)
 			{
-				count1=count2=count3=count4=count5=0;
+				//count1=count2=count3=count4=count5=0;
 				if(!chessboard.getBoard()[i][j].equals(ico))
 					continue;
 				k=value(i, j, ico);
