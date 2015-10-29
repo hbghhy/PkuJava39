@@ -1,0 +1,76 @@
+class MyStack {
+	MyQueue qa = new MyQueue();
+	MyQueue qb = new MyQueue();
+    // Push element x onto stack.
+    public void push(int x) {
+        if(qa.isEmpty()){
+        	qa.push(x);
+        	while(!qb.isEmpty()){
+        		int tmp=qb.peek();
+        		qb.pop();
+        		qa.push(tmp);
+        	}
+        }else{
+        	qb.push(x);
+        	while(!qa.isEmpty()){
+        		int tmp=qa.peek();
+        		qa.pop();
+        		qb.push(tmp);
+        	}
+        }
+    }
+
+    // Removes the element on top of the stack.
+    public void pop() {
+    	if(!qa.isEmpty()){
+    		qa.pop();
+    	}
+    	
+    	if(!qb.isEmpty()){
+    		qb.pop();
+    	}
+    }
+
+    // Get the top element.
+    public int top() {
+    	if(!qa.isEmpty()){
+    		return qa.peek();
+    	}
+    	
+    	if(!qb.isEmpty()){
+    		return qb.peek();
+    	}
+    	
+    	return Integer.MIN_VALUE;
+    }
+
+    // Return whether the stack is empty.
+    public boolean empty() {
+        return qa.isEmpty()&&qb.isEmpty();
+    }
+}
+
+class MyQueue{
+	//push to back, peek/pop from front, size, and is empty operations are valid.
+	LinkedList<Integer> list = new LinkedList<Integer>();
+	
+	public void push(int x){
+		list.addLast(x);
+	}
+	
+	public int peek(){
+		return list.getFirst();
+	}
+	
+	public void pop(){
+		list.removeFirst();
+	}
+	
+	public int size(){
+		return list.size();
+	}
+	
+	public boolean isEmpty(){
+		return list.isEmpty();
+	}
+}

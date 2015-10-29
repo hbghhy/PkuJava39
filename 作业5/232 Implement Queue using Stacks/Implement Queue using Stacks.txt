@@ -1,0 +1,77 @@
+class MyQueue {
+	MyStack stkin = new MyStack();
+	MyStack stkout = new MyStack();
+	
+    // Push element x to the back of queue.
+    public void push(int x) {
+        stkin.push(x);
+    }
+
+    // Removes the element from in front of queue.
+    public void pop() {
+        if(!stkout.empty()){
+        	stkout.pop();
+        }else{
+        	while(!stkin.empty()){
+        		stkout.push(stkin.peek());
+        		stkin.pop();
+        	}
+        	
+        	if(!stkout.empty()){
+            	stkout.pop();
+            }
+        }
+    }
+
+    // Get the front element.
+    public int peek() {
+    	if(!stkout.empty()){
+        	return stkout.peek();
+        }else{
+        	while(!stkin.empty()){
+        		stkout.push(stkin.peek());
+        		stkin.pop();
+        	}
+        	
+        	if(!stkout.empty()){
+            	return stkout.peek();
+            }else{
+            	return Integer.MIN_VALUE;
+            }
+        }
+    }
+
+    // Return whether the queue is empty.
+    public boolean empty() {
+        return stkout.empty()&&stkin.empty();
+    }
+}
+
+class MyStack{
+	LinkedList<Integer> list = new LinkedList<Integer>();
+	
+    public void push(int x) {
+        list.addLast(x);
+    }
+
+    public void pop() {
+    	if(!list.isEmpty()){
+    		list.removeLast();
+    	}
+    }
+
+    public int peek() {
+    	if(!list.isEmpty()){
+    		return list.getLast();
+    	}
+    	return Integer.MIN_VALUE;
+    }
+
+    public boolean empty() {
+        return list.isEmpty();
+    }
+    
+    public int size() {
+        return list.size();
+    }
+}

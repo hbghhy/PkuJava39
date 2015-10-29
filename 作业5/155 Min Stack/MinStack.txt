@@ -1,0 +1,40 @@
+class MinStack {
+    Item top = null;
+	
+	public void push(int x) {
+		Item tmp = new Item(x);
+		if(top!=null){
+			tmp.min=Math.min(tmp.value, top.min);
+		}else{
+			tmp.min=tmp.value;
+		}
+		tmp.next=top;
+		top=tmp;
+    }
+
+    public void pop() {
+        top = top.next;
+    }
+
+    public int top() {
+        if(top!=null){
+        	return top.value;
+        }else{
+        	return Integer.MIN_VALUE;
+        }
+    }
+
+    public int getMin() {
+    	return top.min;
+    }
+}
+
+class Item{
+	int value;
+	int min;
+	Item next;
+	
+	public Item(int v){
+		this.value=v;
+	}
+}
