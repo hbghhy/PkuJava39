@@ -1,0 +1,7 @@
+good bad error ok thank
+time year month
+day hour
+apple bad
+but
+123 456
+end of bad
