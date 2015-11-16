@@ -23,10 +23,10 @@ public class vocabulary {
 		HashSet<String> wordList2=turnToWordList(path2);
 		printUnion(wordList1,wordList2);
 		printCommon(wordList1,wordList2);
-		System.out.println("the number of word in first file:");
-		System.out.println(count(wordList1));
-		System.out.println("the number of word in second file:");
-		System.out.println(count(wordList2));
+		System.out.println("the number of word in first file but not in second file conunt:");
+		printOnly(wordList1, wordList2);
+		System.out.println("the number of word in second file but not in first file conunt:");
+		printOnly(wordList2, wordList1);
 	}
 	public static HashSet<String> turnToWordList(String path) {
 		File f=new File(path);
@@ -108,5 +108,19 @@ public class vocabulary {
 			ans++;
 		}
 		return ans;
+	}
+	public static void printOnly(HashSet<String> s1,HashSet<String> s2)
+	{
+		//print percentage of word belong to s1 but not in s2 
+		int number=0;
+		for(String s:s1)
+		{
+			if(!s2.contains(s))
+			{
+				number++;
+			}
+		}
+		System.out.print(100*(float)number/count(s1));
+		System.out.println("%");
 	}
 }
