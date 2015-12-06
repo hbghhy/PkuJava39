@@ -1,0 +1,24 @@
+public class Solution {
+    public void moveZeroes(int[] nums) {
+        if(nums==null){
+			return;
+		}
+		if(nums.length<=1){
+			return;
+		}
+		int zCount=0;	//0µÄ¸öÊý
+		int i=0,j=nums.length-1;
+		while(i<nums.length){
+			if(nums[i]==0){
+				i++;
+				zCount++;
+			}else{
+			    if(zCount!=0){
+				    nums[i-zCount]=nums[i];
+				    nums[i]=0;
+			    }
+				i++;
+			}
+		}
+    }
+}

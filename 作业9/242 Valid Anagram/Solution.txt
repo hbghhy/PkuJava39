@@ -1,0 +1,23 @@
+public class Solution {
+    public boolean isAnagram(String s, String t) {
+        if(s.length()!=t.length()){
+        	return false;
+        }
+        int[] sum = new int[26];
+        int index;
+        for(int i=0;i<s.length();i++){
+        	index=s.charAt(i)-'a';
+        	sum[index]++;
+        }
+        for(int j=0;j<t.length();j++){
+        	index=t.charAt(j)-'a';
+        	sum[index]--;
+        }
+        for(int k=0;k<26;k++){
+        	if(sum[k]!=0){
+        		return false;
+        	}
+        }
+        return true;
+    }
+}
